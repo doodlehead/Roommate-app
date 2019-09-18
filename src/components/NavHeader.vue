@@ -9,6 +9,11 @@
         :to="link.to">
       {{link.name}}
     </router-link>
+    <router-link to="/login"
+          class="rma-navbar__blockLink"
+          style="margin-left: auto; margin-right: 40px;">
+      Login
+    </router-link>
   </nav>
 </template>
 <script>

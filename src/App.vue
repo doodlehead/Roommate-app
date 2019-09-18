@@ -15,7 +15,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -28,6 +28,11 @@ body {
 }
 
 .rma-layoutContent {
-  margin: 20px;
+  margin: 20px 30px;
+}
+
+//Text input
+.rma-textInput {
+  padding: 4px 8px;
 }
 </style>

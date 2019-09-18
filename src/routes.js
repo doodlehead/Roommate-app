@@ -7,6 +7,12 @@ export default [
       import('@/pages/Home.vue')
   },
   {
+    path: '/login',
+    name: 'login',
+    component: () =>
+      import('@/pages/Login.vue')
+  },
+  {
     path: '/users',
     name: 'user-list',
     component: () =>

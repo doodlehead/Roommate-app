@@ -15,6 +15,9 @@
         <h2>Road Map</h2>
       </div>
     </div>
+    <div>
+      <h2 style="font-size: 30px; text-align: center; margin-top: 40px;">About this app</h2>
+    </div>
   </div>
 </template>
 <script>
@@ -27,7 +30,7 @@ export default {
   //border: 1px solid red;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 0 30px;
+  grid-gap: 40px 30px;
   //padding: 0 20px;
 
   & > &__item {

@@ -2,17 +2,21 @@
   <div class="rma-layoutContent">
     <h1>{{ this.id ? "Edit User" : "Create User" }}</h1>
     <div style="display: flex; flex-direction: column; max-width: 300px;">
-      <label for="email">Email</label>
+      <label for="email" style="margin-bottom: 4px;">Email</label>
       <input id="email"
             type="text"
             v-model="email"
-            style="margin-bottom: 10px;"/>
+            @keyup.enter="createUser"
+            class="rma-textInput"
+            style="margin-bottom: 12px;"/>
 
-      <label for="password">Password</label>
+      <label for="password" style="margin-bottom: 4px;">Password</label>
       <input id="password"
             type="password"
             v-model="password"
-            style="margin-bottom: 10px"/>
+            @keyup.enter="createUser"
+            class="rma-textInput"
+            style="margin-bottom: 16px"/>
     </div>
     <rma-button @click="createUser">Create</rma-button>
   </div>
@@ -61,10 +65,12 @@ export default {
         email: this.email,
         password: this.password
       }).then(res => {
-        console.log(res);
-        console.log('Created user');
+        this.$router.push({ path:'/users', params: {  }});
       });
     }
   }
 }
 </script>
+<style lang="scss" scoped>
+
+</style>
