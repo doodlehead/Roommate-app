@@ -10,9 +10,13 @@
       {{link.name}}
     </router-link>
     <router-link to="/login"
-          class="rma-navbar__blockLink"
-          style="margin-left: auto; margin-right: 40px;">
+          class="rma-navbar__blockLink">
       Login
+    </router-link>
+    <router-link class="rma-navbar__blockLink"
+                  style="margin-left: auto; margin-right: 40px;"
+                  to="/profile">
+      My Profile
     </router-link>
   </nav>
 </template>

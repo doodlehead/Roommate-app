@@ -23,14 +23,6 @@
 </template>
 <script>
 import RmaButton from '@/components/Button';
-const axios = require('axios');
-
-const rest = axios.create({
-  baseURL: 'http://localhost:3000',
-  headers: {
-    'content-type': 'application/json'
-  }
-});
 
 export default {
   name: 'User',
@@ -54,14 +46,14 @@ export default {
   },
   methods: {
     loadUser: function() {
-      rest.get(`/user/${this.id}`).then(res => {
+      this.$rest.get(`/user/${this.id}`).then(res => {
         console.log(res);
       }).catch(err => {
         console.log(err);
       });
     },
     createUser: function() {
-      rest.post('/user', {
+      this.$rest.post('/user', {
         email: this.email,
         password: this.password
       }).then(res => {

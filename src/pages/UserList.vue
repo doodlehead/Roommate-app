@@ -7,12 +7,14 @@
           <tr>
             <th>ID</th>
             <th>Email</th>
+            <th>Password Hash</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="user in users" :key="user.id">
             <td>{{user.id}}</td>
             <td>{{user.email}}</td>
+            <td>{{user.password_hash}}</td>
           </tr>
         </tbody>
       </table>
@@ -20,15 +22,6 @@
   </div>
 </template>
 <script>
-const axios = require('axios');
-
-const rest = axios.create({
-  baseURL: 'http://localhost:3000',
-  headers: {
-    'content-type': 'application/json'
-  }
-});
-
 export default {
   name: 'UserList',
   data: function() {
@@ -37,7 +30,7 @@ export default {
     }
   },
   created: function() {
-    rest.get('/users')
+    this.$rest.get('/users')
       .then(res => {
         this.users.push(...res.data);
       }).catch(err => {
