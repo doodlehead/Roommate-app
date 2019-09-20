@@ -1,22 +1,19 @@
 <template>
   <div class="rma-layoutContent">
-    <h1 style="text-align: center; font-size: 44px; margin-top: 40px;">Welcome to my Roommate App!</h1>
+    <h1 style="text-align: center; font-size: 44px; margin-top: 40px;">An application for roommates.</h1>
     <div class="rma-homepageGrid">
       <div class="rma-homepageGrid__item">
-        <h2>Explore</h2>
+        <h2>Feature 1</h2>
         <div>
-          blah blah
+
         </div>
       </div>
       <div class="rma-homepageGrid__item">
-        <h2>Features</h2>
+        <h2>Feature 2</h2>
       </div>
       <div class="rma-homepageGrid__item">
-        <h2>Road Map</h2>
+        <h2>Feature 3</h2>
       </div>
-    </div>
-    <div>
-      <h2 style="font-size: 30px; text-align: center; margin-top: 40px;">About this app</h2>
     </div>
   </div>
 </template>

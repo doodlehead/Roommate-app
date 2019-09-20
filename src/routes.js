@@ -13,6 +13,12 @@ export default [
       import('@/pages/Login.vue')
   },
   {
+    path: '/register',
+    name: 'register',
+    component: () =>
+      import('@/pages/Register.vue')
+  },
+  {
     path: '/profile',
     name: 'profile',
     component: () =>

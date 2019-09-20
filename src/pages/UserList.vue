@@ -34,6 +34,7 @@ export default {
       .then(res => {
         this.users.push(...res.data);
       }).catch(err => {
+        //TODO: handle error
         console.log(err);
       });
   }

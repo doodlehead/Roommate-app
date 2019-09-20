@@ -1,6 +1,6 @@
 <template>
   <div class="rma-layoutContent">
-    <h1>User Login</h1>
+    <h1>Register</h1>
     <div style="display: flex; flex-direction: column; max-width: 300px;">
       <label for="email" style="margin-bottom: 4px;">Email</label>
       <input id="email"
@@ -18,15 +18,14 @@
             class="rma-textInput"
             style="margin-bottom: 16px"/>
     </div>
-    <rma-button @click="login">Login</rma-button>
-    <p>Don't have an account? <router-link to="/register">Sign up</router-link></p>
+    <rma-button @click="createUser">Sign up</rma-button>
   </div>
 </template>
 <script>
 import RmaButton from '@/components/Button';
 
 export default {
-  name: 'Login',
+  name: 'Register',
   components: {
     RmaButton
   },
@@ -37,21 +36,8 @@ export default {
     }
   },
   methods: {
-    login: function() {
-      this.$rest.post('/authenticate', { 'email': this.email, 'password': this.password })
-        .then(res => {
-          //Store the auth token
-          localStorage.setItem('Authorization', res.data.authorization);
-          //configure the Rest Client to have the Authorization header
-          this.$rest.defaults.headers.common['Authorization'] = res.data.authorization;
+    createUser: function() {
 
-          //TODO: redirect to User Landing Page. Where should this be?
-          this.$router.push('/');
-          //Force the navbar to update...
-          this.$emit('login');
-        }).catch(err => {
-          console.log(err);
-        });
     }
   }
 }

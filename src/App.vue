@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <nav-header/>
-    <router-view/>
+    <nav-header :update="counter"/>
+    <router-view @logout="handleLogout" @login="handleLogin"/>
   </div>
 </template>
 
@@ -12,6 +12,28 @@ export default {
   name: 'roommate-app',
   components: {
     NavHeader
+  },
+  data: function() {
+    return {
+      counter: 0
+    }
+  },
+  created: function() {
+    //Check for the Auth token in localStorage
+    if(localStorage.getItem('Authorization')) {
+      //Configure the Rest Client to have the Authorization header
+      this.$rest.defaults.headers.common['Authorization'] = localStorage.getItem('Authorization');
+    }
+  },
+  methods: {
+    handleLogout: function() {
+      console.log('handle logout');
+      this.counter += 1;
+    },
+    handleLogin: function() {
+      console.log('handle login');
+      this.counter += 1;
+    }
   }
 }
 </script>

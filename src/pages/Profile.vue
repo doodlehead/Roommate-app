@@ -1,6 +1,6 @@
 <template>
   <div class="rma-layoutContent">
-    <h1>My profile</h1>
+    <h1>My profile: {{status}}</h1>
   </div>
 </template>
 <script>
@@ -10,13 +10,16 @@ export default {
 
   },
   data: function() {
-    return {}
+    return {
+      status: '',
+      user: null
+    }
   },
   created: function() {
     this.$rest.get('/api/me').then(res => {
-      console.log(res);
+      this.status = 'Authenticated';
     }).catch(err => {
-      console.log(err);
+      this.status = 'BAD'
     });
   },
   methods: {
