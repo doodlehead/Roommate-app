@@ -38,6 +38,20 @@ export default [
       import('@/pages/User.vue')
   },
   {
+    path: '/groups',
+    name: 'groups',
+    props: true,
+    component: () =>
+      import('@/pages/GroupList.vue')
+  },
+  {
+    path: '/group/:id?',
+    name: 'group',
+    props: true,
+    component: () =>
+      import('@/pages/Group.vue')
+  },
+  {
     path: '/about',
     name: 'about',
     component: () =>

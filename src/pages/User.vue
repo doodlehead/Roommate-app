@@ -1,33 +1,27 @@
 <template>
   <div class="rma-layoutContent">
-    <h1>{{ this.id ? "Edit User" : "Create User" }}</h1>
-    <div style="display: flex; flex-direction: column; max-width: 300px;">
-      <label for="email" style="margin-bottom: 4px;">Email</label>
-      <input id="email"
-            type="text"
-            v-model="email"
-            @keyup.enter="createUser"
-            class="rma-textInput"
-            style="margin-bottom: 12px;"/>
-
-      <label for="password" style="margin-bottom: 4px;">Password</label>
-      <input id="password"
-            type="password"
-            v-model="password"
-            @keyup.enter="createUser"
-            class="rma-textInput"
-            style="margin-bottom: 16px"/>
+    <div v-if="!this.id">
+      <h1>Create User</h1>
+      <div style="display: flex; flex-direction: column; max-width: 300px;">
+        <rma-input id="email" label="Email" v-model="email" @keyup.enter="createUser"/>
+        <rma-input id="password" type="password" label="Password" v-model="password" @keyup.enter="createUser"/>
+      </div>
+      <rma-button @click="createUser">Create</rma-button>
     </div>
-    <rma-button @click="createUser">Create</rma-button>
+    <div v-else>
+      <h1>Edit User</h1>
+    </div>
   </div>
 </template>
 <script>
 import RmaButton from '@/components/Button';
+import RmaInput from '@/components/Input';
 
 export default {
   name: 'User',
   components: {
-    RmaButton
+    RmaButton,
+    RmaInput
   },
   props: {
     id: String

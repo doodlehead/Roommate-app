@@ -11,7 +11,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="user in users" :key="user.id">
+          <tr v-for="user in users"
+              :key="user.id"
+              @dblclick="$router.push(`/user/${user.id}`)">
             <td>{{user.id}}</td>
             <td>{{user.email}}</td>
             <td>{{user.password_hash}}</td>

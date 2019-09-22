@@ -1,34 +1,21 @@
 <template>
   <div class="rma-layoutContent">
     <h1>User Login</h1>
-    <div style="display: flex; flex-direction: column; max-width: 300px;">
-      <label for="email" style="margin-bottom: 4px;">Email</label>
-      <input id="email"
-            type="text"
-            v-model="email"
-            @keyup.enter="login"
-            class="rma-textInput"
-            style="margin-bottom: 12px;"/>
-
-      <label for="password" style="margin-bottom: 4px;">Password</label>
-      <input id="password"
-            type="password"
-            v-model="password"
-            @keyup.enter="login"
-            class="rma-textInput"
-            style="margin-bottom: 16px"/>
-    </div>
+      <rma-input id="email" label="Email" v-model="email" @keyup.enter="login"/>
+      <rma-input id="password" type="password" label="Password" v-model="password" @keyup.enter="login"/>
     <rma-button @click="login">Login</rma-button>
     <p>Don't have an account? <router-link to="/register">Sign up</router-link></p>
   </div>
 </template>
 <script>
+import RmaInput from '@/components/Input';
 import RmaButton from '@/components/Button';
 
 export default {
   name: 'Login',
   components: {
-    RmaButton
+    RmaButton,
+    RmaInput
   },
   data: function() {
     return {

@@ -50,12 +50,11 @@ body {
   margin: 0;
 }
 
-.rma-layoutContent {
-  margin: 20px 30px;
+h1 {
+  margin-top: 0;
 }
 
-//Text input
-.rma-textInput {
-  padding: 4px 8px;
+.rma-layoutContent {
+  margin: 20px 30px;
 }
 </style>

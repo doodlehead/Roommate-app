@@ -45,7 +45,6 @@
         Sign in
       </router-link>
       <router-link class="rma-navbar__blockLink rma-navbar__registerButton"
-                    style=""
                     to="/register">
         Register
       </router-link>
@@ -170,16 +169,15 @@ export default {
     //border: 2px solid #41B883;
     //background-color: #41B883;
     //color: white;
-    border-right: 1px solid #b0b0b0;
     padding: 8px 12px;
-    border: 1px solid #b0b0b0;
+    border: 1px solid #2c3e50;
     border-radius: 3px;
   }
 
   & &__registerButton {
     background-color: #41B883;
     color: white;
-    border-right: 1px solid #b0b0b0;
+    //border-right: 1px solid #b0b0b0;
     border-radius: 3px;
     padding: 8px 12px;
     margin-left: 0;

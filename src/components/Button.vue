@@ -12,12 +12,23 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .rma-button {
   padding: 6px 14px;
   border: 1px solid #b0b0b0;
   border-radius: 2px;
   background-color: #41B883;
   color: white;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.85;
+  }
+
+  &--large {
+    font-size: 20px;
+    font-weight: 600;
+    padding: 8px 18px;
+  }
 }
 </style>
