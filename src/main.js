@@ -11,7 +11,7 @@ Vue.use(VueRouter);
 //Rest API client
 const axios = require('axios');
 const restClient = axios.create({
-  baseURL: process.env.REST_API_URL,
+  baseURL: process.env.VUE_APP_REST_API_URL,
   headers: {
     'content-type': 'application/json'
   }

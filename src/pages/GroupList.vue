@@ -6,21 +6,10 @@
         <div style="font-size: 24px; font-weight: 600; text-align: center; margin-bottom: 12px;">Create new group</div>
         <div class="rma-plusButton">+</div>
       </div>
-      <div>
-        <h2>Mock group 1</h2>
-      </div>
-      <div>
-        <h2>Mock group 2</h2>
+      <div v-for="group in groupList" :key="group.id">
+        <h2>{{group.name}}</h2>
       </div>
     </div>
-
-<!--     <rma-modal title="I'm a title"
-              @close="showModal = false"
-              v-if="showModal">
-      <div>
-        I'm mister Meeseeks, look at me!
-      </div>
-    </rma-modal> -->
   </div>
 </template>
 <script>
@@ -33,21 +22,26 @@ export default {
   },
   data: function() {
     return {
-      showModal: false
+      showModal: false,
+      groupList: []
     }
   },
   methods: {
-    createGroup: function() {
-      //TODO: create a group
-      //Open up a modal?
-    }
+  },
+  created: function() {
+    this.$rest.get('/api/groups')
+      .then(res => {
+        groupList.push(...res.data);
+      }).catch(err => {
+        console.log(err);
+      });
   }
 }
 </script>
 <style lang="scss" scoped>
 .rma-groupGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 20px;
 
   & > div {
