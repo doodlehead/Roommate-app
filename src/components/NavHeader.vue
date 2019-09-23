@@ -4,7 +4,7 @@
       Roommate App
     </div>
     <router-link class="rma-navbar__blockLink"
-        v-for="link in navLinks"
+        v-for="link in displayLinks"
         :key="link.name"
         :to="link.to">
       {{link.name}}
@@ -20,7 +20,7 @@
     </div> -->
     <div class="rma-navbar__blockLink rma-navbar__dropdown"
           v-if="authenticated">
-      Admin
+      Debug
       <!-- TODO: refine this. Maybe refactor into components... -->
       <div class="rma-navbar__dropdownContent">
         <router-link to="/users" class="rma-navbar__dropdownLink">User List</router-link>
@@ -49,8 +49,6 @@
         Register
       </router-link>
     </div>
-
-
   </nav>
 </template>
 <script>
@@ -66,26 +64,31 @@ export default {
     return {
       navLinks: [
         {name: 'Home', to: '/'},
-        {name: 'My Groups', to: '/groups'},
+        {name: 'My Groups', to: '/groups', needAuth: true},
         {name: 'About', to: '/about'}
       ],
       authenticated: false
     }
   },
   computed: {
+    displayLinks: function() {
+      return this.navLinks.filter(elem => {
+        return this.authenticated || !elem.needAuth;
+      });
+    }
   },
   methods: {
     logout: function() {
       localStorage.removeItem('Authorization');
-      this.$router.push('/');
       this.authenticated = false;
+      //Refresh
+      window.location.href = "/";
     }
   },
   watch: {
     update: function() {
       console.log('Watch triggered');
       this.authenticated = !!localStorage.getItem('Authorization');
-      this.$forceUpdate();
     }
   }
 }

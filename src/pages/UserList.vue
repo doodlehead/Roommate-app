@@ -12,9 +12,9 @@
         </thead>
         <tbody>
           <tr v-for="user in users"
-              :key="user.id"
-              @dblclick="$router.push(`/user/${user.id}`)">
-            <td>{{user.id}}</td>
+              :key="user.user_id"
+              @dblclick="$router.push(`/user/${user.user_id}`)">
+            <td>{{user.user_id}}</td>
             <td>{{user.email}}</td>
             <td>{{user.password_hash}}</td>
           </tr>
@@ -32,7 +32,7 @@ export default {
     }
   },
   created: function() {
-    this.$rest.get('/users')
+    this.$rest.get('/api/users')
       .then(res => {
         this.users.push(...res.data);
       }).catch(err => {
@@ -43,19 +43,4 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-table.rma-table {
-  border-collapse: collapse;
-  & tr, & td, & th {
-    border: 1px solid #ddd;
-  }
-
-  & td, & th {
-    text-align: left;
-    padding: 8px 12px;
-  }
-
-  tbody > tr:nth-child(odd) {
-    background-color: #f2f2f2;
-  }
-}
 </style>

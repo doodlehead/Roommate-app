@@ -2,17 +2,23 @@
   <div class="rma-layoutContent">
     <h1 style="text-align: center; font-size: 44px; margin-top: 40px;">An application for roommates.</h1>
     <div class="rma-homepageGrid">
-      <div class="rma-homepageGrid__item">
+      <div class="rma-homepageItem">
         <h2>Create shared calendars</h2>
-        <div>
-
+        <div class="rma-homepageItem__content">
+          In development
         </div>
       </div>
-      <div class="rma-homepageGrid__item">
+      <div class="rma-homepageItem">
         <h2>Split money</h2>
+        <div class="rma-homepageItem__content">
+          Coming soon!
+        </div>
       </div>
-      <div class="rma-homepageGrid__item">
+      <div class="rma-homepageItem">
         <h2>Post shared messages</h2>
+        <div class="rma-homepageItem__content">
+          Coming soon!
+        </div>
       </div>
     </div>
   </div>
@@ -30,14 +36,28 @@ export default {
   grid-gap: 40px 30px;
   //padding: 0 20px;
 
-  & > &__item {
+  .rma-homepageItem {
     border: 2px solid #eaecef;
-    padding: 0 12px;
+    padding: 16px 12px;
     border-radius: 2px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
 
-
-    & > h2 {
+    h2 {
       text-align: center;
+    }
+
+    &__content {
+      //TEMP
+      font-size: 22px;
+      text-align: center;
+      margin: auto;
+      text-transform: uppercase;
+      font-style: italic;
+      border: 1px solid #b0b0b0;
+      border-radius: 5px;
+      padding: 16px 20px;
     }
   }
 }

@@ -50,11 +50,27 @@ body {
   margin: 0;
 }
 
-h1 {
+h1, h2 {
   margin-top: 0;
 }
 
 .rma-layoutContent {
   margin: 20px 30px;
+}
+
+table.rma-table {
+  border-collapse: collapse;
+  & tr, & td, & th {
+    border: 1px solid #ddd;
+  }
+
+  & td, & th {
+    text-align: left;
+    padding: 8px 12px;
+  }
+
+  tbody > tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
 }
 </style>

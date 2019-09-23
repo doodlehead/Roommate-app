@@ -34,14 +34,16 @@ export default {
     createUser: function() {
       this.$rest.post('/user', {
         email: this.email,
-        password: this.password
+        password: this.password,
+        firstName: this.firstName,
+        lastName: this.lastName
       }).then(res => {
         //this.$router.push({ path:'/users', params: {  }});
         //TODO: authenticate?
         this.$router.push('/login');
       }).catch(err => {
         console.log(err);
-        this.errorMessages.push(err.message);
+        this.errorMessages.push(err.message || err);
       });
     }
   }

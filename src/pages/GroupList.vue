@@ -6,8 +6,9 @@
         <div style="font-size: 24px; font-weight: 600; text-align: center; margin-bottom: 12px;">Create new group</div>
         <div class="rma-plusButton">+</div>
       </div>
-      <div v-for="group in groupList" :key="group.id">
-        <h2>{{group.name}}</h2>
+      <div v-for="group in groupList" :key="group.group_id" @dblclick="gotoGroup(group.group_id)">
+        <h2>{{group.group_name}}</h2>
+
       </div>
     </div>
   </div>
@@ -27,11 +28,14 @@ export default {
     }
   },
   methods: {
+    gotoGroup: function(group_id) {
+      this.$router.push(`/group/${group_id}`);
+    }
   },
   created: function() {
     this.$rest.get('/api/groups')
       .then(res => {
-        groupList.push(...res.data);
+        this.groupList.push(...res.data);
       }).catch(err => {
         console.log(err);
       });
@@ -48,8 +52,13 @@ export default {
     border: 2px solid #bbb;
     border-radius: 3px;
     min-height: 200px;
-    padding: 8px 12px;
+    padding: 12px 18px;
     cursor: pointer;
+
+    & > h2 {
+      padding-bottom: 8px;
+      border-bottom: 1px solid #bbb;
+    }
 
     &:hover {
       background-color: rgb(235, 235, 235);
