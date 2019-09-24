@@ -61,6 +61,7 @@ export default {
   },
   methods: {
     createUser: function() {
+      this.errorMessages = [];
       //Run the validation by...
 
       this.$rest.post('/user', {
@@ -73,8 +74,7 @@ export default {
         //TODO: authenticate?
         this.$router.push('/login');
       }).catch(err => {
-        console.log(err);
-        this.errorMessages.push(err.message || err);
+        this.errorMessages.push(err.response.data || err.message || err);
       });
     }
   }

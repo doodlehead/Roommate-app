@@ -1,8 +1,8 @@
 <template>
   <ValidationProvider :rules="rules"
-                      v-slot="{ errors }"
-                      :name="name">
-    <rma-input v-model="innerValue" v-bind="$attrs"/>
+            v-slot="{ errors }"
+            :name="name">
+    <rma-input v-model="innerValue" v-bind="$attrs" v-on="$listeners"/>
     <div v-if="errors[0]" class="rma-validation">* {{ errors[0] }}</div>
     <div v-else style="padding: 7px;"></div>
   </ValidationProvider>

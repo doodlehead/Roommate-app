@@ -56,5 +56,11 @@ export default [
     name: 'about',
     component: () =>
       import('@/pages/About.vue')
+  },
+  {
+    path: '/about/design-diary',
+    name: 'design-diary',
+    component: () =>
+      import('@/pages/DesignDiary.vue')
   }
 ]

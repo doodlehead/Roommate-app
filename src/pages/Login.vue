@@ -1,9 +1,18 @@
 <template>
   <div class="rma-layoutContent">
     <h1>User Login</h1>
-      <rma-input id="email" label="Email" v-model="email" @keyup.enter="login" style="margin-bottom: 10px"/>
-      <rma-input id="password" type="password" label="Password" v-model="password" @keyup.enter="login" style="margin-bottom: 10px"/>
-    <rma-button @click="login">Login</rma-button>
+    <rma-input id="email"
+              label="Email"
+              v-model="email"
+              @keyup.enter="login"
+              style="margin-bottom: 10px"/>
+    <rma-input id="password"
+              type="password"
+              label="Password"
+              v-model="password"
+              @keyup.enter="login"
+              style="margin-bottom: 14px"/>
+    <rma-button @click="login" style="margin-bottom: 12px;">Login</rma-button>
     <p>Don't have an account? <router-link to="/register">Sign up</router-link></p>
   </div>
 </template>
