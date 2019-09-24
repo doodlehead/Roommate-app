@@ -1,25 +1,54 @@
 <template>
-  <div class="rma-layoutContent" style="display: flex;">
-    <div class="rma-registerPanel">
+  <div class="rma-layoutContent" style="display: flex; flex-direction: column;">
+    <div v-if="errorMessages && errorMessages.length" class="rma-errorPanel" style="margin-bottom: 20px;">{{errorMessages}}</div>
+    <ValidationObserver v-slot="{ invalid }" class="rma-registerPanel">
       <!-- TOOD: Maybe do a form submission thingy? -->
       <h1>Create Your Account</h1>
-      <rma-input id="email" label="Email" v-model="email" @keyup.enter="createUser" style="margin-bottom: 14px;"/>
-      <rma-input id="password" type="password" label="Password" v-model="password" @keyup.enter="createUser" style="margin-bottom: 14px;"/>
-      <rma-input id="first_name" label="First Name" v-model="firstName" @keyup.enter="createUser" style="margin-bottom: 14px;"/>
-      <rma-input id="last_name" label="Last Name" v-model="lastName" @keyup.enter="createUser"/>
-      <rma-button @click="createUser" class="rma-button--large" style="margin-top: 18px;">Sign up</rma-button>
-    </div>
+      <rma-input-validated id="email"
+                  label="Email"
+                  name="email"
+                  rules="required|email"
+                  v-model="email"
+                  @keyup.enter="createUser"/>
+      <rma-input-validated id="password"
+                  type="password"
+                  label="Password"
+                  name="password"
+                  rules="required"
+                  v-model="password"
+                  @keyup.enter="createUser"
+                  style="margin-bottom: 14px;"/>
+      <rma-input-validated id="first_name"
+                  label="First Name"
+                  name="first name"
+                  rules="required"
+                  v-model="firstName"
+                  @keyup.enter="createUser"
+                  style="margin-bottom: 14px;"/>
+      <rma-input-validated id="last_name"
+                  label="Last Name"
+                  name="last name"
+                  rules="required"
+                  v-model="lastName"
+                  @keyup.enter="createUser"/>
+      <rma-button @click="createUser"
+                  class="rma-button--large"
+                  style="margin-top: 10px;"
+                  :disabled="invalid">Sign up</rma-button>
+    </ValidationObserver>
   </div>
 </template>
 <script>
 import RmaInput from '@/components/Input';
+import RmaInputValidated from '@/components/InputValidated';
 import RmaButton from '@/components/Button';
 
 export default {
   name: 'Register',
   components: {
     RmaButton,
-    RmaInput
+    RmaInput,
+    RmaInputValidated
   },
   data: function() {
     return {
@@ -27,11 +56,13 @@ export default {
       password: '',
       firstName: '',
       lastName: '',
-      //errorMessages: []
+      errorMessages: []
     }
   },
   methods: {
     createUser: function() {
+      //Run the validation by...
+
       this.$rest.post('/user', {
         email: this.email,
         password: this.password,
@@ -53,10 +84,18 @@ export default {
 .rma-registerPanel {
   margin-bottom: 8px;
   border: 1px solid #b0b0b0;
-  border-radius: 3px;
+  border-radius: 5px;
   margin: 0 auto;
-  padding: 20px 40px;
+  padding: 40px 80px;
   min-width: 180px;
-  flex-basis: 460px;
+  //flex-basis: 300px;
+}
+
+.rma-errorPanel {
+  border: 1px solid #d73a49;
+  border-radius: 5px;
+  background-color: #ffeef0;
+
+  padding: 12px;
 }
 </style>

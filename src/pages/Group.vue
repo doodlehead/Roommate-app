@@ -25,7 +25,7 @@
         <tbody>
           <tr v-for="user in userList"
               :key="user.user_id">
-            <input type="checkbox"/>
+            <td style="text-align: center;"><input type="checkbox" :value="user.user_id" v-model="checkedUsers"/></td>
             <td>{{user.user_id}}</td>
             <td>{{user.email}}</td>
             <td>{{user.first_name}}</td>
@@ -52,7 +52,8 @@ export default {
   data: function() {
     return {
       groupName: '',
-      userList: []
+      userList: [],
+      checkedUsers: []
     }
   },
   created: function() {

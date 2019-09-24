@@ -12,7 +12,7 @@
 <script>
 export default {
   name: 'Input',
-  inheritAttrs: false,
+  //inheritAttrs: false,
   props: {
     id: {
       type: String,
@@ -26,6 +26,8 @@ export default {
       type: String,
       default: 'text'
     },
+    name: String,
+    rules: String,
     value: String
   },
   computed: {

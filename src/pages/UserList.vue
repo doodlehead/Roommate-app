@@ -7,7 +7,8 @@
           <tr>
             <th>ID</th>
             <th>Email</th>
-            <th>Password Hash</th>
+            <th>First name</th>
+            <th>Last name</th>
           </tr>
         </thead>
         <tbody>
@@ -16,7 +17,8 @@
               @dblclick="$router.push(`/user/${user.user_id}`)">
             <td>{{user.user_id}}</td>
             <td>{{user.email}}</td>
-            <td>{{user.password_hash}}</td>
+            <td>{{user.first_name}}</td>
+            <td>{{user.last_name}}</td>
           </tr>
         </tbody>
       </table>

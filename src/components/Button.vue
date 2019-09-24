@@ -1,6 +1,7 @@
 <template>
   <button class="rma-button"
-          @click="$emit('click')">
+          @click="$emit('click')"
+          :disabled="disabled ? true : false">
     <slot>{{text}}</slot>
   </button>
 </template>
@@ -8,7 +9,8 @@
 export default {
   name: 'rma-button',
   props: {
-    text: String
+    text: String,
+    disabled: Boolean
   }
 }
 </script>
@@ -29,6 +31,11 @@ export default {
     font-size: 20px;
     font-weight: 600;
     padding: 8px 18px;
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
   }
 }
 </style>

@@ -50,7 +50,7 @@ body {
   margin: 0;
 }
 
-h1, h2 {
+h1, h2, h3, p {
   margin-top: 0;
 }
 
@@ -72,5 +72,13 @@ table.rma-table {
   tbody > tr:nth-child(odd) {
     background-color: #f2f2f2;
   }
+}
+
+.rma-validation {
+  font-size: 12px;
+  color: rgb(187, 6, 6);
+  margin-bottom: 8px;
+  margin-top: 2px;
+  padding-left: 6px;
 }
 </style>

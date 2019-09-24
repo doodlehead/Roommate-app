@@ -2,7 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import VueRouter from 'vue-router';
 import routes from './routes.js';
-import { ValidationProvider, extend } from 'vee-validate';
+import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { required, email } from 'vee-validate/dist/rules';
 
 Vue.config.productionTip = false;
@@ -25,6 +25,7 @@ extend('required', {
 });
 extend('email', email);
 Vue.component('ValidationProvider', ValidationProvider);
+Vue.component('ValidationObserver', ValidationObserver);
 
 const router = new VueRouter({ routes });
 
