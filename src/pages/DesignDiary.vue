@@ -7,6 +7,18 @@
 
     <h3>Front-end Design</h3>
     <p>All the front-end components on the website are done from scratch, no component library is used and everything is written in Vue.js and SCSS.</p>
+
+    <h2>To do</h2>
+
+    <h3>Authorization</h3>
+    <p>Users should only have access to their own resources and nobody else's.</p>
+
+    <h3>Transactions on REST endpoints</h3>
+    <p>If any step within a transaction fails, the whole transaction should roll back.</p>
+
+    <h3>Use a server-side validation framework/library for Express</h3>
+    <p>Doing it all manually is a pain...</p>
+
   </div>
 </template>
 <script>

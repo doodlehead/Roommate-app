@@ -12,6 +12,7 @@
     </div>
     <div v-else>
       <h1>Edit User</h1>
+      {{user}}
     </div>
   </div>
 </template>
@@ -33,7 +34,8 @@ export default {
       email: '',
       password: '',
       firstName: '',
-      lastName: ''
+      lastName: '',
+      user: null
     }
   },
   created: function() {
@@ -44,7 +46,7 @@ export default {
   methods: {
     loadUser: function() {
       this.$rest.get(`/user/${this.id}`).then(res => {
-        console.log(res);
+        this.user = res.data;
       }).catch(err => {
         console.log(err);
       });

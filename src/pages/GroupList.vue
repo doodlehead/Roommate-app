@@ -6,7 +6,7 @@
         <div style="font-size: 24px; font-weight: 600; text-align: center; margin-bottom: 12px;">Create new group</div>
         <div class="rma-plusButton">+</div>
       </div>
-      <div v-for="group in groupList" :key="group.group_id" @dblclick="gotoGroup(group.group_id)">
+      <div v-for="group in groupList" :key="group.group_id" @click="gotoGroup(group.group_id)">
         <h2>{{group.group_name}}</h2>
 
       </div>

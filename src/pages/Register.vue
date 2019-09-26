@@ -1,6 +1,8 @@
 <template>
   <div class="rma-layoutContent" style="display: flex; flex-direction: column;">
-    <div v-if="errorMessages && errorMessages.length" class="rma-errorPanel" style="margin-bottom: 20px;">{{errorMessages}}</div>
+    <div v-if="errorMessages && errorMessages.length"
+        class="rma-errorPanel"
+        style="margin-bottom: 20px;">{{errorMessages}}</div>
     <ValidationObserver v-slot="{ invalid }" class="rma-registerPanel">
       <!-- TOOD: Maybe do a form submission thingy? -->
       <h1>Create Your Account</h1>
@@ -89,13 +91,5 @@ export default {
   padding: 40px 80px;
   min-width: 180px;
   //flex-basis: 300px;
-}
-
-.rma-errorPanel {
-  border: 1px solid #d73a49;
-  border-radius: 5px;
-  background-color: #ffeef0;
-
-  padding: 12px;
 }
 </style>

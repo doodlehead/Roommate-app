@@ -1,14 +1,21 @@
 <template>
   <div class="rma-layoutContent">
+    <div v-if="errorMessages && errorMessages.length"
+        class="rma-errorPanel"
+        style="margin-bottom: 20px;">{{errorMessages}}</div>
     <h1>User Login</h1>
-    <rma-input id="email"
+    <rma-input-validated id="email"
               label="Email"
+              name="email"
+              rules="required|email"
               v-model="email"
               @keyup.enter="login"
               style="margin-bottom: 10px"/>
-    <rma-input id="password"
+    <rma-input-validated id="password"
               type="password"
               label="Password"
+              name="password"
+              rules="required"
               v-model="password"
               @keyup.enter="login"
               style="margin-bottom: 14px"/>
@@ -18,22 +25,27 @@
 </template>
 <script>
 import RmaInput from '@/components/Input';
+import RmaInputValidated from '@/components/InputValidated';
 import RmaButton from '@/components/Button';
 
 export default {
   name: 'Login',
   components: {
     RmaButton,
-    RmaInput
+    RmaInput,
+    RmaInputValidated
   },
   data: function() {
     return {
       email: '',
-      password: ''
+      password: '',
+      errorMessages: []
     }
   },
   methods: {
     login: function() {
+      this.errorMessages = []; //Clear errors
+
       this.$rest.post('/authenticate', { 'email': this.email, 'password': this.password })
         .then(res => {
           //Store the auth token
@@ -46,7 +58,7 @@ export default {
           //Force the navbar to update...
           this.$emit('login');
         }).catch(err => {
-          console.log(err);
+          this.errorMessages.push(err.response.data || err.message || err);
         });
     }
   }

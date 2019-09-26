@@ -39,6 +39,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css?family=Dosis:500|Open+Sans:300&display=swap');
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -80,5 +82,12 @@ table.rma-table {
   margin-bottom: 8px;
   margin-top: 2px;
   padding-left: 6px;
+}
+
+.rma-errorPanel {
+  border: 1px solid #d73a49;
+  border-radius: 5px;
+  background-color: #ffeef0;
+  padding: 12px;
 }
 </style>
