@@ -6,8 +6,6 @@
       <div>
         <h2>Incoming Features</h2>
         <div style="padding-left: 10px;">
-          <h3>Server-side caching on API requests</h3>
-          <h3>Authorization on API requests</h3>
           <h3>Create and share calendars with roommates</h3>
           <h3>Roommate Chatrooms</h3>
           <h3>Mobile support as a PWA</h3>

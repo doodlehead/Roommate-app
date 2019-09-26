@@ -13,7 +13,7 @@
       <div class="rma-groupEdit">
         <div>
           <h2>Current Members</h2>
-          <rma-button style="background: rgb(255, 38, 38); margin-bottom: 10px; font-weight: 600;"
+          <rma-button style="background: var(--error-red); margin-bottom: 10px; font-weight: 600;"
                       :disabled="!checkedUsersRemove.length"
                       @click="removeUsersFromGroup">Remove selected roommates</rma-button>
           <rma-simple-table :rowData="members" style="margin-bottom: 20px;">

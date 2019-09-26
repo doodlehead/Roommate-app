@@ -17,9 +17,9 @@ export default {
 <style lang="scss" scoped>
 .rma-button {
   padding: 6px 14px;
-  border: 1px solid #b0b0b0;
+  border: 1px solid var(--gray);
   border-radius: 2px;
-  background-color: #41B883;
+  background-color: var(--green1);
   color: white;
   cursor: pointer;
 

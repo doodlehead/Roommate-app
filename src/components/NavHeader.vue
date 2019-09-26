@@ -103,7 +103,7 @@ export default {
 .rma-navbar {
   //background-color: #41B883;
   display: flex;
-  border-bottom: 1px solid #eaecef;
+  border-bottom: 1px solid var(--light-gray);
   font-size: 18px;
   font-weight: 600;
   user-select: none;
@@ -117,7 +117,7 @@ export default {
     border-bottom: 2px solid transparent;
 
     &:hover {
-      border-bottom: 2px solid #41B883;
+      border-bottom: 2px solid var(--green1);
     }
   }
 
@@ -160,27 +160,21 @@ export default {
     font-size: 24px;
     padding: 8px;
     margin: 8px 60px 8px 8px;
-    //color: #41B883;
-    //color: #35495E;
 
-    background: linear-gradient(to right, #41B883 0%, #35495E 100%);
+    background: linear-gradient(to right, var(--green1) 0%, var(--dark-green) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   & &__loginButton {
-    //border: 2px solid #41B883;
-    //background-color: #41B883;
-    //color: white;
     padding: 8px 12px;
-    border: 1px solid #2c3e50;
+    border: 1px solid var(--text-color);
     border-radius: 3px;
   }
 
   & &__registerButton {
-    background-color: #41B883;
+    background-color: var(--green1);
     color: white;
-    //border-right: 1px solid #b0b0b0;
     border-radius: 3px;
     padding: 8px 12px;
     margin-left: 0;

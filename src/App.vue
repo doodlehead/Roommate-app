@@ -41,11 +41,22 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Dosis:500|Open+Sans:300&display=swap');
 
+:root {
+  --text-color: #2c3e50;
+  --green1: #41B883;
+  --dark-green: #35495E;
+  --light-gray: #eaecef;
+  --gray: #bbb;
+  --error-red: #d73a49;
+  --light-red: #ffeef0;
+  --red: #ff2626;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: var(--text-color);
 }
 
 body {
@@ -78,16 +89,16 @@ table.rma-table {
 
 .rma-validation {
   font-size: 12px;
-  color: rgb(187, 6, 6);
+  color: var(--error-red);
   margin-bottom: 8px;
   margin-top: 2px;
   padding-left: 6px;
 }
 
 .rma-errorPanel {
-  border: 1px solid #d73a49;
+  border: 1px solid var(--error-red);
   border-radius: 5px;
-  background-color: #ffeef0;
+  background-color: var(--light-red);
   padding: 12px;
 }
 </style>
