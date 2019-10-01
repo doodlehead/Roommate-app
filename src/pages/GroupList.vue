@@ -1,7 +1,7 @@
 <template>
   <div class="rma-layoutContent">
-    <h1>My Groups</h1>
-    <p>Create a group and add your roommates to the group.</p>
+    <h1 style="margin-bottom: 10px;">My Groups</h1>
+    <p style="margin-bottom: 10px;">Create a group and add your roommates to the group.</p>
     <div class="rma-groupGrid">
       <div @click="$router.push('/group')">
         <div style="font-size: 24px; font-weight: 600; text-align: center; margin-bottom: 12px;">Create new group</div>
@@ -82,6 +82,7 @@ export default {
 
     & > h2 {
       padding-bottom: 8px;
+      margin-bottom: 8px;
       border-bottom: 1px solid #bbb;
     }
 

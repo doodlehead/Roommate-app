@@ -1,7 +1,7 @@
 <template>
   <div class="rma-layoutContent">
-    <h1>About</h1>
-    <p>Hey there! This website is currently under construction. </p>
+    <h1 style="margin-bottom: 10px;">About</h1>
+    <p style="margin-bottom: 10px;">Hey there! This website is currently under construction. </p>
     <div class="rma-aboutGrid">
       <div>
         <h2>Incoming Features</h2>
@@ -78,6 +78,7 @@ export default {
 
     & > h2 {
       border-bottom: 1px solid #b0b0b0;
+      margin-bottom: 8px;
       padding-bottom: 8px;
     }
 

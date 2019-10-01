@@ -57,6 +57,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--text-color);
+  height: 100vh;
 }
 
 body {
@@ -100,5 +101,11 @@ table.rma-table {
   border-radius: 5px;
   background-color: var(--light-red);
   padding: 12px;
+}
+
+.rma-cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 20px;
 }
 </style>

@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 import routes from './routes.js';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { required, email } from 'vee-validate/dist/rules';
+import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
@@ -18,6 +19,10 @@ const restClient = axios.create({
 });
 Vue.prototype.$rest = restClient;
 
+//Moment.js
+var moment = require('moment');
+Vue.prototype.$moment = moment;
+
 //Vee-validate
 extend('required', {
   ...required,
@@ -31,5 +36,6 @@ const router = new VueRouter({ routes });
 
 new Vue({
   render: h => h(App),
+  vuetify,
   router
 }).$mount('#app');

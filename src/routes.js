@@ -39,7 +39,7 @@ export default [
   },
   {
     path: '/groups',
-    name: 'groups',
+    name: 'group-list',
     props: true,
     component: () =>
       import('@/pages/GroupList.vue')
@@ -50,6 +50,26 @@ export default [
     props: true,
     component: () =>
       import('@/pages/Group.vue')
+  },
+  {
+    path: '/calendars',
+    name: 'calendar-list',
+    component: () =>
+      import('@/pages/CalendarList.vue')
+  },
+  {
+    path: '/calendar/:id',
+    name: 'calendar',
+    props: true,
+    component: () =>
+      import('@/pages/Calendar.vue')
+  },
+  {
+    path: '/calendar-test',
+    name: 'calendar-test',
+    props: true,
+    component: () =>
+      import('@/pages/CalendarTest.vue')
   },
   {
     path: '/about',

@@ -1,6 +1,6 @@
 <template>
   <div class="rma-layoutContent">
-    <h1 style="text-align: center; font-size: 44px; margin-top: 40px;">An application for roommates.</h1>
+    <h1 style="text-align: center; font-size: 44px; margin-top: 40px; margin-bottom: 16px;">An application for roommates.</h1>
     <div class="rma-homepageGrid">
       <div class="rma-homepageItem">
         <h2>Create shared calendars</h2>

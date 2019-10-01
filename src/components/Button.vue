@@ -1,6 +1,6 @@
 <template>
-  <button class="rma-button"
-          @click="$emit('click')"
+  <button :class="['rma-button', styleClassMap[stylePreset]]"
+          @click="$emit('click', $event)"
           :disabled="disabled ? true : false">
     <slot>{{text}}</slot>
   </button>
@@ -10,7 +10,19 @@ export default {
   name: 'rma-button',
   props: {
     text: String,
-    disabled: Boolean
+    disabled: Boolean,
+    stylePreset: {
+      type: String,
+      validator: (v) => v == "light" || v == "dark"
+    }
+  },
+  data: function() {
+    return {
+      styleClassMap: {
+        light: 'rma-button--light',
+        dark: 'rma-button--dark'
+      }
+    }
   }
 }
 </script>
@@ -22,6 +34,11 @@ export default {
   background-color: var(--green1);
   color: white;
   cursor: pointer;
+
+  &--light {
+    color: var(--text-color);
+    background-color: white;
+  }
 
   &:hover {
     opacity: 0.85;

@@ -77,6 +77,7 @@ export default {
   data: function() {
     return {
       groupData: null,
+      groupName: '',
       userList: [], //All users lol
       members: [],
       checkedUsersAdd: [],

@@ -25,6 +25,7 @@
       <div class="rma-navbar__dropdownContent">
         <router-link to="/users" class="rma-navbar__dropdownLink">User List</router-link>
         <router-link to="/user" class="rma-navbar__dropdownLink">Create User</router-link>
+        <router-link to="/calendar-test" class="rma-navbar__dropdownLink">Calendar Test</router-link>
       </div>
     </div>
 
@@ -65,6 +66,7 @@ export default {
       navLinks: [
         {name: 'Home', to: '/'},
         {name: 'My Groups', to: '/groups', needAuth: true},
+        {name: 'Calendars', to: '/calendars', needAuth: true},
         {name: 'About', to: '/about'}
       ],
       authenticated: false

@@ -1,6 +1,6 @@
 <template>
   <div style="display: flex; flex-direction: column; max-width: 270px;">
-    <label :for="id" style="margin-bottom: 4px; font-weight: 600;">{{label}}</label>
+    <label v-if="label" :for="id" style="margin-bottom: 4px; font-weight: 600;">{{label}}</label>
     <input :type="type"
           :id="id"
           class="rma-textInput"
@@ -18,10 +18,7 @@ export default {
       type: String,
       required: true
     },
-    label: {
-      type: String,
-      required: true
-    },
+    label: String,
     type: {
       type: String,
       default: 'text'
@@ -57,5 +54,6 @@ export default {
   padding: 6px 10px;
   border: 1px solid #aaa;
   border-radius: 2px;
+  flex-grow: 1;
 }
 </style>
