@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <nav-header :update="counter"/>
+    <div style="min-height: 60px;">
+      <nav-header :update="counter"/>
+    </div>
     <router-view @logout="handleLogout" @login="handleLogin"/>
   </div>
 </template>
@@ -58,6 +60,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: var(--text-color);
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 body {
@@ -107,5 +111,10 @@ table.rma-table {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 20px;
+}
+
+.rma-fieldLabel {
+  margin-bottom: 4px;
+  font-weight: 600;
 }
 </style>

@@ -7,7 +7,7 @@
                   intervalCount="17"
                   firstInterval="7"
                   :events="formatEvents"
-                  event-color="w"
+                  event-color="#FAEBD7"
                   @click:time="handleTimelineClick"
                   @click:event="handleEventClick">
       </v-calendar>
@@ -18,24 +18,41 @@
         <div v-if="selectedEvent" class="rma-eventMenu">
           <div class="rma-eventMenu__header">
 
-            <rma-input v-if="editEvent"
-                      id="eventTitle"
-                      v-model="selectedEvent.name"
-                      class="rma-disguisedInput"
-                      style="flex-grow: 1"/>
-            <h3 v-else>{{selectedEvent.name}}</h3>
+            <rma-input id="eventTitle"
+                      v-model="selectedEvent.event_name"
+                      class="rma-disguisedInput--dark"
+                      style="margin: auto 0;"
+                      stylePreset="dark"
+                      :disguised="!editEvent"/>
 
-            <v-btn icon style="margin-left: auto;"
-                  @click="editEvent = true">
+            <v-btn icon style="margin: auto; margin-right: 0;"
+                  @click="editEvent = true"
+                  v-if="!editEvent">
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
+            <div v-else style="margin: auto; margin-right: 0;">
+              <rma-button stylePreset="error" style="margin-right: 10px;" @click="editEvent = false;">Cancel</rma-button>
+              <rma-button stylePreset="white">Save</rma-button>
+            </div>
           </div>
 
           <div class="rma-eventMenu__content">
-            <div>Time: {{selectedEvent.start}} to {{selectedEvent.end}}</div>
-            Description: <br>
-            Importance:  <br>
-            {{selectedEvent}}
+            <div>
+              <div style="display: flex; margin-bottom: 10px;">
+                <rma-input label="start date" id="startDate" v-model="selectedEvent.start_date" :disguised="!editEvent" style="flex-grow: 1; margin-right: 10px;"/>
+                <rma-input label="end date" id="endDate" v-model="selectedEvent.end_date" :disguised="!editEvent" style="flex-grow: 1;"/>
+              </div>
+              <div style="display: flex;">
+                <rma-time-selector label="start time" v-model="selectedEvent.start_time" :disguised="!editEvent" style="flex-grow: 1; margin-right: 10px;"/>
+                <rma-time-selector label="end time" v-model="selectedEvent.end_time" :disguised="!editEvent" style="flex-grow: 1;"/>
+              </div>
+              <rma-select label="importance" :options="importanceOptions" v-model="selectedEvent.event_importance" :disguised="!editEvent" style="margin-bottom: 10px;"/>
+              <label class="rma-fieldLabel">description</label>
+              <rma-text-area rows="4" cols="50" v-model="selectedEvent.description" :disguised="!editEvent"/>
+            </div>
+            <div style="border-top: 1px solid var(--light-gray);">
+              <rma-button stylePreset="error" style="margin-top: 10px;" @click="deleteEvent(selectedEvent.event_id)">Delete</rma-button>
+            </div>
           </div>
         </div>
       </v-menu>
@@ -48,11 +65,19 @@
 </template>
 <script>
 import RmaInput from '@/components/Input';
+import RmaButton from '@/components/Button';
+import RmaTextArea from '@/components/TextArea';
+import RmaTimeSelector from '@/components/TimeSelector';
+import RmaSelect from '@/components/Select';
 
 export default {
   name: 'Calendar',
   components: {
-    RmaInput
+    RmaInput,
+    RmaButton,
+    RmaTextArea,
+    RmaTimeSelector,
+    RmaSelect
   },
   props: {
     id: String
@@ -66,32 +91,42 @@ export default {
       selectedEvent: null,
       editEvent: false,
       tempEvent: null,
+      importanceOptions: {
+        trivial: 'trivial',
+        minor: 'minor',
+        major: 'major',
+        critical: 'critical'
+      }
       //eventsMap: {}
     }
   },
   created: function() {
-    this.$rest.get(`/api/calendar/${this.id}`)
-      .then(res => {
-        this.calendarData = res.data;
-        //this.processEventData(res.data.events);
-      }).catch(err => {
-        console.log(err);
-      });
+    this.loadCalendarData();
   },
   methods: {
-    createEventJson: function(name, startMoment, endMoment, recurring) {
+    createEventJson: function(name, startMoment, endMoment, description, eventImportance, recurring) {
       return {
+        calendarId: this.id,
         name,
         startTime: startMoment.format('HH:mm'),
         endTime: endMoment.format('HH:mm'),
         startDate: startMoment.format('YYYY-MM-DD'),
         endDate: startMoment.format('YYYY-MM-DD'),
+        description,
+        eventImportance,
         recurring
       }
     },
+    loadCalendarData: function() {
+      this.$rest.get(`/api/calendar/${this.id}`)
+        .then(res => {
+          this.calendarData = res.data;
+          //this.processEventData(res.data.events);
+        }).catch(err => {
+          console.log(err);
+        });
+    },
     handleTimelineClick: function(event) {
-      console.log(event);
-
       //Close the menu
       if(this.selectedOpen) {
         this.selectedOpen = false;
@@ -107,7 +142,7 @@ export default {
       endTime.add(60, 'minutes');
 
       //REST request
-      this.$rest.post(`/api/calendar/${this.id}/event`, this.createEventJson('Untitled Event', startTime, endTime, false))
+      this.$rest.post(`/api/calendar/${this.id}/event`, this.createEventJson('Untitled Event', startTime, endTime, '','minor' ,false))
         .then(res => {
           this.calendarData.events.push(this.formatEvent(res.data));
         }).catch(err => {
@@ -117,14 +152,10 @@ export default {
     },
     //Clicking an event on the calendar
     handleEventClick: function({ nativeEvent, event }) {
-      console.log(event);
-
       this.selectedElement = nativeEvent.target;
       this.selectedEvent = event;
       //You have to wait...?
       setTimeout(() => this.selectedOpen = true, 10);
-
-      console.log("Changing selected event");
       //Stop the event propogation
       nativeEvent.stopPropagation();
     },
@@ -133,17 +164,40 @@ export default {
       dbEvent.end = `${this.$moment(dbEvent.end_date).format('YYYY-MM-DD')} ${dbEvent.end_time}`;
       dbEvent.name = dbEvent.event_name;
       return dbEvent;
+    },
+    deleteEvent: function(eventId) {
+      //TODO: open up a prompt?
+      this.$rest.delete(`/api/calendar/${this.id}/event/${eventId}`)
+        .then(res => {
+          //Reset menu stuff and reload calendar
+          this.selectedOpen = false;
+          this.selectedElement = null;
+          this.selectedEvent = null;
+          this.loadCalendarData();
+        }).catch(err => {
+          console.log(err);
+        });
+    },
+    updateEvent: function(eventId) {
+      this.$rest.put(`/api/calendar/${this.id}/event/${eventId}`, {
+        name: this.selectedEvent.event_name,
+        startTime: this.selectedEvent.start_time,
+        endTime: this.selectedEvent.end_time,
+        startDate: this.selectedEvent.start_date,
+        endDate: this.selectedEvent.end_date,
+        recurring: this.selectedEvent.recurring
+      })
+        .then(res => {
+          this.loadCalendarData();
+        }).catch(err => {
+          console.log(err);
+        });
     }
-    // processEventData: function(eventLists) {
-    //   eventLists.forEach(elem => {
-    //     this.eventsMap[elem.event_id] = elem;
-    //   });
-    // }
   },
   computed: {
-    getEvents: function() {
-      return this.tempEvent ? [...this.calendarData.events, this.tempEvent] : [...this.calendarData.events];
-    },
+    // getEvents: function() {
+    //   return this.tempEvent ? [...this.calendarData.events, this.tempEvent] : [...this.calendarData.events];
+    // },
     formatEvents: function() {
       if(!this.calendarData) return;
       //YYYY-MM-DD HH:mm
@@ -165,10 +219,11 @@ export default {
   max-width: 550px;
 
   &__header {
-    padding: 8px;
+    padding: 0 8px;
     background-color: var(--green1);
     color: white;
     display: flex;
+    height: 44px;
 
     & > h3 {
       //height: 100%;
@@ -177,12 +232,12 @@ export default {
     }
   }
   &__content {
-    padding: 8px 12px;
+    padding: 8px 18px;
   }
 }
 
-.rma-disguisedInput {
-  background-color: rgb(30,30,30,0.25);
+.rma-disguisedInput--dark {
+  //background-color: rgb(30,30,30,0.25);
   border-radius: 3px;
 
   //Override the default input styles

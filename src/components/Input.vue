@@ -1,31 +1,46 @@
 <template>
   <div style="display: flex; flex-direction: column; max-width: 270px;">
-    <label v-if="label" :for="id" style="margin-bottom: 4px; font-weight: 600;">{{label}}</label>
+    <label v-if="label" :for="id" class="rma-fieldLabel">{{label}}</label>
     <input :type="type"
           :id="id"
-          class="rma-textInput"
+          :class="['rma-textInput', styleMap[stylePreset]]"
           v-bind="$attrs"
           v-on="inputListeners"
-          :value="value"/>
+          :value="value"
+          :readonly="disguised"
+          :disguised="disguised"/>
   </div>
 </template>
 <script>
+
 export default {
   name: 'Input',
   //inheritAttrs: false,
   props: {
-    id: {
-      type: String,
-      required: true
-    },
+    id: String,
     label: String,
     type: {
       type: String,
       default: 'text'
     },
+    disguised: {
+      type: Boolean,
+      default: false
+    },
+    stylePreset: {
+      type: String,
+      validator: (v) => v == "dark"
+    },
     name: String,
     rules: String,
     value: String
+  },
+  data: function() {
+    return {
+      styleMap: {
+        dark: 'rma-textInput--dark'
+      }
+    }
   },
   computed: {
     inputListeners: function() {
@@ -55,5 +70,14 @@ export default {
   border: 1px solid #aaa;
   border-radius: 2px;
   flex-grow: 1;
+
+  &[disguised] {
+    border: 1px solid transparent;
+    outline: none;
+  }
+
+  &--dark:not([disguised]) {
+    background-color: rgb(30,30,30,0.25);
+  }
 }
 </style>

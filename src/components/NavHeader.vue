@@ -105,11 +105,18 @@ export default {
 .rma-navbar {
   //background-color: #41B883;
   display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
   border-bottom: 1px solid var(--light-gray);
   font-size: 18px;
   font-weight: 600;
   user-select: none;
   white-space: nowrap;
+  z-index: 5;
+  background-color: white;
 
   & &__blockLink {
     color: #2c3e50;
