@@ -203,8 +203,8 @@ export default {
       //YYYY-MM-DD HH:mm
       //Format the JSON data so the vuetify calendar understands it
       return this.calendarData.events.map(elem => {
-        elem.start = `${this.$moment(elem.start_date).format('YYYY-MM-DD')} ${elem.start_time}`;
-        elem.end = `${this.$moment(elem.end_date).format('YYYY-MM-DD')} ${elem.end_time}`;
+        elem.start = `${this.$moment(elem.start_date.substring(0, 10)).format('YYYY-MM-DD')} ${elem.start_time}`;
+        elem.end = `${this.$moment(elem.end_date.substring(0, 10)).format('YYYY-MM-DD')} ${elem.end_time}`;
         elem.name = elem.event_name;
         return elem;
       });
