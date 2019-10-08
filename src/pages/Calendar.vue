@@ -160,8 +160,8 @@ export default {
       nativeEvent.stopPropagation();
     },
     formatEvent: function(dbEvent) {
-      dbEvent.start = `${this.$moment(dbEvent.start_date).format('YYYY-MM-DD')} ${dbEvent.start_time}`;
-      dbEvent.end = `${this.$moment(dbEvent.end_date).format('YYYY-MM-DD')} ${dbEvent.end_time}`;
+      dbEvent.start = `${this.$moment(dbEvent.start_date.substring(0, 10)).format('YYYY-MM-DD')} ${dbEvent.start_time}`;
+      dbEvent.end = `${this.$moment(dbEvent.end_date.substring(0, 10)).format('YYYY-MM-DD')} ${dbEvent.end_time}`;
       dbEvent.name = dbEvent.event_name;
       return dbEvent;
     },
