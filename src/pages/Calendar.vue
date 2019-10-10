@@ -32,23 +32,22 @@
             </v-btn>
             <div v-else style="margin: auto; margin-right: 0;">
               <rma-button stylePreset="error" style="margin-right: 10px;" @click="editEvent = false;">Cancel</rma-button>
-              <rma-button stylePreset="white">Save</rma-button>
+              <rma-button stylePreset="white" @click="updateEvent">Save</rma-button>
             </div>
           </div>
 
           <div class="rma-eventMenu__content">
             <div>
               <div style="display: flex; margin-bottom: 10px;">
-                <rma-input label="start date" id="startDate" v-model="selectedEvent.start_date" :disguised="!editEvent" style="flex-grow: 1; margin-right: 10px;"/>
-                <rma-input label="end date" id="endDate" v-model="selectedEvent.end_date" :disguised="!editEvent" style="flex-grow: 1;"/>
+                <rma-input label="Start date" id="startDate" v-model="selectedEvent.start_date" :disguised="!editEvent" style="flex-grow: 1; margin-right: 10px;"/>
+                <rma-input label="End date" id="endDate" v-model="selectedEvent.end_date" :disguised="!editEvent" style="flex-grow: 1;"/>
               </div>
               <div style="display: flex;">
-                <rma-time-selector label="start time" v-model="selectedEvent.start_time" :disguised="!editEvent" style="flex-grow: 1; margin-right: 10px;"/>
-                <rma-time-selector label="end time" v-model="selectedEvent.end_time" :disguised="!editEvent" style="flex-grow: 1;"/>
+                <rma-time-selector label="Start time" v-model="selectedEvent.start_time" :disguised="!editEvent" style="flex-grow: 1; margin-right: 10px;"/>
+                <rma-time-selector label="End time" v-model="selectedEvent.end_time" :disguised="!editEvent" style="flex-grow: 1;"/>
               </div>
-              <rma-select label="importance" :options="importanceOptions" v-model="selectedEvent.event_importance" :disguised="!editEvent" style="margin-bottom: 10px;"/>
-              <label class="rma-fieldLabel">description</label>
-              <rma-text-area rows="4" cols="50" v-model="selectedEvent.description" :disguised="!editEvent"/>
+              <rma-select label="Importance" :options="importanceOptions" v-model="selectedEvent.event_importance" :disguised="!editEvent" style="margin-bottom: 10px;"/>
+              <rma-text-area rows="4" cols="50" v-model="selectedEvent.description" :disguised="!editEvent" label="Description"/>
             </div>
             <div style="border-top: 1px solid var(--light-gray);">
               <rma-button stylePreset="error" style="margin-top: 10px;" @click="deleteEvent(selectedEvent.event_id)">Delete</rma-button>
@@ -90,7 +89,7 @@ export default {
       selectedElement: null,
       selectedEvent: null,
       editEvent: false,
-      tempEvent: null,
+      tempEvent: {},
       importanceOptions: {
         trivial: 'trivial',
         minor: 'minor',
@@ -153,7 +152,10 @@ export default {
     //Clicking an event on the calendar
     handleEventClick: function({ nativeEvent, event }) {
       this.selectedElement = nativeEvent.target;
-      this.selectedEvent = event;
+      this.tempEvent = Object.assign(this.tempEvent, event);
+
+      this.selectedEvent = this.tempEvent;
+
       //You have to wait...?
       setTimeout(() => this.selectedOpen = true, 10);
       //Stop the event propogation
@@ -178,26 +180,26 @@ export default {
           console.log(err);
         });
     },
-    updateEvent: function(eventId) {
-      this.$rest.put(`/api/calendar/${this.id}/event/${eventId}`, {
+    updateEvent: function() {
+      this.$rest.put(`/api/calendar/${this.id}/event/${this.selectedEvent.event_id}`, {
         name: this.selectedEvent.event_name,
         startTime: this.selectedEvent.start_time,
         endTime: this.selectedEvent.end_time,
         startDate: this.selectedEvent.start_date,
         endDate: this.selectedEvent.end_date,
-        recurring: this.selectedEvent.recurring
-      })
-        .then(res => {
+        recurring: this.selectedEvent.recurring,
+        description: this.selectedEvent.description,
+        eventImportance: this.selectedEvent.event_importance
+      }).then(res => {
           this.loadCalendarData();
+          this.editEvent = false;
         }).catch(err => {
           console.log(err);
         });
     }
   },
   computed: {
-    // getEvents: function() {
-    //   return this.tempEvent ? [...this.calendarData.events, this.tempEvent] : [...this.calendarData.events];
-    // },
+    //TODO: fix this?
     formatEvents: function() {
       if(!this.calendarData) return;
       //YYYY-MM-DD HH:mm

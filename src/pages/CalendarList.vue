@@ -9,7 +9,7 @@
       <div class="rma-popupMenu">
         <div class="rma-popupMenu__header"><h3>New Calendar Form</h3></div>
         <div class="rma-popupMenu__content">
-          <rma-input label="Calendar name" id="calendar_name" v-model="calendarName" style="margin-bottom: 10px;"/>
+          <rma-input label="Calendar name" id="calendar_name" v-model="calendarName" @keyup.enter="createCalendar" style="margin-bottom: 10px;"/>
           <rma-button @click="createCalendar">Create</rma-button>
         </div>
       </div>
@@ -19,10 +19,13 @@
       <div v-for="calendar in calendarList"
             :key="calendar.calendar_id"
             class="rma-calendarCard">
-        <div style="margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--gray);">{{calendar}}</div>
-
-        <rma-button stylePreset="light" style="margin-right: 12px;">Edit</rma-button>
-        <rma-button @click="$router.push(`/calendar/${calendar.calendar_id}`)">View</rma-button>
+        <div style="margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--gray); font-size: 22px;">
+          {{calendar.calendar_name}}
+        </div>
+        <div style="display: flex;">
+          <rma-button @click="deleteCalendar(calendar.calendar_id)" stylePreset="error" style="margin-right: 10px;">Delete</rma-button>
+          <rma-button @click="$router.push(`/calendar/${calendar.calendar_id}`)">View</rma-button>
+        </div>
       </div>
     </div>
 
@@ -47,14 +50,17 @@ export default {
     }
   },
   created: function() {
-    this.$rest.get('/api/calendars')
-      .then(res => {
-        this.calendarList.push(...res.data);
-      }).catch(err => {
-        console.log(err);
-      });
+    this.getUserCalendars();
   },
   methods: {
+    getUserCalendars: function() {
+      this.$rest.get('/api/calendars')
+        .then(res => {
+          this.calendarList = res.data;
+        }).catch(err => {
+          console.log(err);
+        });
+    },
     openMenu: function(event) {
       console.log(event);
       this.selectedElement = event.target;
@@ -63,8 +69,16 @@ export default {
     createCalendar: function() {
       this.$rest.post('/api/calendar', {name: this.calendarName})
         .then(res => {
-          console.log('success');
           this.showMenu = false;
+          this.getUserCalendars();
+        }).catch(err => {
+          console.log(err);
+        });
+    },
+    deleteCalendar: function(calendarId) {
+      this.$rest.delete(`/api/calendar/${calendarId}`)
+        .then(res => {
+          this.getUserCalendars();
         }).catch(err => {
           console.log(err);
         });

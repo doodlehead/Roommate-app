@@ -5,7 +5,7 @@
       <div class="rma-homepageItem">
         <h2>Create shared calendars</h2>
         <div class="rma-homepageItem__content">
-          In development
+          In Alpha!
         </div>
       </div>
       <div class="rma-homepageItem">
